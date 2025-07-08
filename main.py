@@ -224,6 +224,7 @@ async def aggregate_docs(collection: str,pipeline: List[dict] = Body(...),
 @app.post("/upload_photos")
 async def upload_photos(
     user_id: int = Form(...),
+    marriage_code : str = Form(...),
     files: list[UploadFile] = File(...),
     _: str = Depends(get_current_user)
 ):
@@ -234,7 +235,7 @@ async def upload_photos(
         file_ids.append(file_id)
         today_date = str(datetime.now())
         await db["marriage_photos"].insert_one({"user_id": user_id, "photo_ids": file_ids,
-                                            "uploaded_date": today_date})
+                                            "marriage_code" : marriage_code ,"uploaded_date": today_date})
     return {"uploaded": [str(fid) for fid in file_ids]}
 
 @app.get("/get_photo/{file_id}")
