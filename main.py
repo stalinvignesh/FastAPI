@@ -1,18 +1,23 @@
 import uuid
 from fastapi import FastAPI, HTTPException, Body, Depends, Request, Header
-from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi import UploadFile, File, Form
+from fastapi.responses import StreamingResponse
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorGridFSBucket
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from passlib.context import CryptContext
 from pydantic import BaseModel
 from jose import JWTError, jwt
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta , date
 import random
 from typing import List
+import gridfs
+from bson import ObjectId, errors as bson_errors
+import io
 
 from starlette.responses import JSONResponse
 
-app = FastAPI()
+app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,6 +29,8 @@ app.add_middleware(
 
 client = AsyncIOMotorClient("mongodb://localhost:27017")
 db = client["weceleb"]
+#fs = gridfs.GridFS(db)
+fs = AsyncIOMotorGridFSBucket(db)
 
 SECRET_KEY = "SECRET_KEY"
 ALGORITHM = "HS256"
@@ -213,4 +220,50 @@ async def aggregate_docs(collection: str,pipeline: List[dict] = Body(...),
         return result
     except Exception as e:
         return JSONResponse(status_code=400, content={"error": str(e)})
+
+@app.post("/upload_photos")
+async def upload_photos(
+    user_id: int = Form(...),
+    files: list[UploadFile] = File(...),
+    _: str = Depends(get_current_user)
+):
+    file_ids = []
+    for file in files:
+        content = await file.read()
+        file_id = await fs.upload_from_stream(file.filename,content)
+        file_ids.append(file_id)
+        today_date = str(datetime.now())
+        await db["marriage_photos"].insert_one({"user_id": user_id, "photo_ids": file_ids,
+                                            "uploaded_date": today_date})
+    return {"uploaded": [str(fid) for fid in file_ids]}
+
+@app.get("/get_photo/{file_id}")
+async def get_photo(file_id: str, _: str = Depends(get_current_user)):
+    try:
+        oid = ObjectId(file_id)
+    except bson_errors.InvalidId:
+        raise HTTPException(status_code=400, detail="Invalid file_id")
+    grid_out = await fs.open_download_stream(oid)
+    contents = await grid_out.read()
+    return StreamingResponse(io.BytesIO(contents), media_type="image/jpeg")
+
+@app.get("/get_photos/user/{user_id}")
+async def get_user_photos(user_id: int, _: str = Depends(get_current_user)):
+    cursor =  db["marriage_photos"].find({"user_id": user_id})
+    results = []
+    if cursor.alive:
+        async for doc in cursor:
+            if "_id" in doc:
+                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
+            if "photo_ids" in doc:
+                doc["photo_ids"] = [str(pid) for pid in doc["photo_ids"]]
+            results.append(doc)
+    return results
+
+@app.get("/get_photos/marriage/{marriage_code}")
+async def get_marriage_photos(marriage_code: str, _: str = Depends(get_current_user)):
+    record = await db["marriage_photos"].find_one({"marriage_code": marriage_code})
+    if not record:
+        return {"photo_ids": []}
+    return {"photo_ids": [str(fid) for fid in record["photo_ids"]]}
 

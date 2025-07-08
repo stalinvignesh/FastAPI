@@ -1,0 +1,4 @@
+cache/
+__pycache__/
+api_cache.sqlite
+.idea/
