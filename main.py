@@ -268,3 +268,45 @@ async def get_marriage_photos(marriage_code: str, _: str = Depends(get_current_u
         return {"photo_ids": []}
     return {"photo_ids": [str(fid) for fid in record["photo_ids"]]}
 
+@app.delete("/delete_photo/{photo_id}")
+async def delete_photo(
+    photo_id: str,
+    user_id: str,  # Or grab it from your auth context
+    _: str = Depends(get_current_user)
+):
+    try:
+        # Delete the file from GridFS
+        await fs.delete(ObjectId(photo_id))
+
+        # Also remove its reference from photos collection
+        await db["marriage_photos"].update_one(
+            {"user_id": user_id},
+            {"$pull": {"photo_ids": ObjectId(photo_id)}}
+        )
+
+        return {"status": "success", "message": f"Photo {photo_id} deleted."}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+@app.delete("/delete_photos/")
+async def delete_photos(
+    user_id: str = Body(...),
+    photo_ids: list[str] = Body(...),
+    _: str = Depends(get_current_user)
+):
+    try:
+        for pid in photo_ids:
+            await fs.delete(ObjectId(pid))
+
+        # Remove all from user doc
+        await db["marriage_photos"].update_one(
+            {"user_id": user_id},
+            {"$pull": {"photo_ids": {"$in": [ObjectId(pid) for pid in photo_ids]}}}
+        )
+
+        return {"status": "success", "deleted": photo_ids}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
