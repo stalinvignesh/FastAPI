@@ -288,7 +288,7 @@ async def delete_photo(
     try:
         # Delete the file from GridFS
         await fs.delete(ObjectId(photo_id))
-        print(f"user is {user_id} and marriage_code is {marriage_code}")
+        #print(f"user is {user_id} and marriage_code is {marriage_code}")
 
         # Also remove its reference from photos collection
         await db["marriage_photos"].update_many(
