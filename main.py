@@ -1,6 +1,7 @@
 import uuid
 from fastapi import FastAPI, HTTPException, Body, Depends, Request, Header
-from fastapi import UploadFile, File, Form
+from fastapi import UploadFile, File, Form , Query
+from fastapi.params import Query
 from fastapi.responses import StreamingResponse
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorGridFSBucket
 from fastapi.middleware.cors import CORSMiddleware
@@ -233,8 +234,8 @@ async def upload_photos(
         content = await file.read()
         file_id = await fs.upload_from_stream(file.filename,content)
         file_ids.append(file_id)
-        today_date = str(datetime.now())
-        await db["marriage_photos"].insert_one({"user_id": user_id, "photo_ids": file_ids,
+    today_date = str(datetime.now())
+    await db["marriage_photos"].insert_one({"user_id": user_id, "photo_ids": file_ids,
                                             "marriage_code" : marriage_code ,"uploaded_date": today_date})
     return {"uploaded": [str(fid) for fid in file_ids]}
 
@@ -263,26 +264,44 @@ async def get_user_photos(user_id: int, _: str = Depends(get_current_user)):
 
 @app.get("/get_photos/marriage/{marriage_code}")
 async def get_marriage_photos(marriage_code: str, _: str = Depends(get_current_user)):
-    record = await db["marriage_photos"].find_one({"marriage_code": marriage_code})
-    if not record:
-        return {"photo_ids": []}
-    return {"photo_ids": [str(fid) for fid in record["photo_ids"]]}
+    cursor = db["marriage_photos"].find({"marriage_code": marriage_code})
+    results = []
+    if cursor.alive:
+        async for doc in cursor:
+            if "_id" in doc:
+                doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
+            if "photo_ids" in doc:
+                doc["photo_ids"] = [str(pid) for pid in doc["photo_ids"]]
+            results.append(doc)
+    return results
+    #if not record: #this is for find_one
+    #    return {"photo_ids": []}
+    #return {"photo_ids": [str(fid) for fid in record["photo_ids"]]}
 
-@app.delete("/delete_photo/{photo_id}")
+@app.post("/delete_photo/{photo_id}")
 async def delete_photo(
-    photo_id: str,
-    user_id: str,  # Or grab it from your auth context
+    photo_id: str ,
+    user_id: int = Form(...),
+    marriage_code : str =  Form(...),
     _: str = Depends(get_current_user)
 ):
     try:
         # Delete the file from GridFS
         await fs.delete(ObjectId(photo_id))
+        print(f"user is {user_id} and marriage_code is {marriage_code}")
 
         # Also remove its reference from photos collection
-        await db["marriage_photos"].update_one(
-            {"user_id": user_id},
+        await db["marriage_photos"].update_many(
+            {"user_id": int(user_id),"marriage_code" : marriage_code},
             {"$pull": {"photo_ids": ObjectId(photo_id)}}
         )
+
+        #Delete the document if photo_ids is empty
+        cursor = db["marriage_photos"].find({"user_id": int(user_id),"marriage_code" : marriage_code})
+        if cursor.alive:
+            async for record in cursor:
+                if not record["photo_ids"]:
+                    await db["marriage_photos"].delete_one({"_id" : ObjectId(record["_id"])})
 
         return {"status": "success", "message": f"Photo {photo_id} deleted."}
 
