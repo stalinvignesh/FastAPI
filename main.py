@@ -2,6 +2,7 @@ import uuid
 from fastapi import FastAPI, HTTPException, Body, Depends, Request, Header
 from fastapi import UploadFile, File, Form , Query
 from fastapi.params import Query
+from fastapi import WebSocket, WebSocketDisconnect
 from fastapi.responses import StreamingResponse
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorGridFSBucket
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,10 +12,12 @@ from pydantic import BaseModel
 from jose import JWTError, jwt
 from datetime import datetime, timedelta , date
 import random
-from typing import List
+from typing import List, Dict
 import gridfs
 from bson import ObjectId, errors as bson_errors
 import io
+import websockets
+import websocket
 
 from starlette.responses import JSONResponse
 
@@ -22,7 +25,7 @@ app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  #Need to set for PROD
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -112,6 +115,18 @@ async def get_current_user(authorization: str = Header(...)):
         return phone_number
     except JWTError:
         raise HTTPException(status_code=403, detail="Could not validate credentials")
+
+async def get_current_user_websocket(token: str):
+    """Modified version for WebSocket token validation"""
+    credentials_exception = WebSocketDisconnect(code=1008, reason="Invalid token")
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        phone_number: str = payload.get("sub")
+        if phone_number is None:
+            raise credentials_exception
+        return phone_number
+    except JWTError:
+        raise credentials_exception
 
 async def verify_api_key(authorization: str = Header(...)):
     if authorization != f"Bearer {SECRET_KEY}":
@@ -329,3 +344,54 @@ async def delete_photos(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
 
+class ConnectionManager:
+    def __init__(self):
+        self.rooms: Dict[str, List[WebSocket]] = {}
+
+    async def connect(self, marriage_code: str, websocket: WebSocket):
+        await websocket.accept()
+        if marriage_code not in self.rooms:
+            self.rooms[marriage_code] = []
+        self.rooms[marriage_code].append(websocket)
+
+    def disconnect(self, marriage_code: str, websocket: WebSocket):
+        self.rooms[marriage_code].remove(websocket)
+        if not self.rooms[marriage_code]:
+            del self.rooms[marriage_code]
+
+    async def broadcast(self, marriage_code: str, message: str):
+        if marriage_code in self.rooms:
+            for connection in self.rooms[marriage_code]:
+                await connection.send_text(message)
+
+manager = ConnectionManager()
+
+@app.websocket("/ws/live/{marriage_code}")
+async def websocket_endpoint(websocket: WebSocket, marriage_code: str, token: str , user : int,nick_name : str):
+    # Do JWT auth just like your normal Depends:
+    user_ph = await get_current_user_websocket(token)
+
+    await manager.connect(marriage_code, websocket)
+    print(marriage_code,token,user,nick_name)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            doc = {
+                "marriage_code": marriage_code,
+                "user_id": int(user),
+                "nick_name": nick_name,
+                "comment" : data,
+                "timestamp": str(datetime.now())
+            }
+            await db["video_comments"].insert_one(doc)
+            await manager.broadcast(marriage_code, f"{nick_name}: {data}")
+    except WebSocketDisconnect:
+        manager.disconnect(marriage_code, websocket)
+
+@app.get("/comments/{marriage_code}")
+async def get_history(marriage_code: str, _: str = Depends(get_current_user)):
+    messages = []
+    cursor = db["video_comments"].find({"marriage_code": marriage_code}).sort("timestamp", -1).limit(50)
+    async for doc in cursor:
+        messages.append(f"{doc['nick_name']}: {doc['comment']}")
+    return messages[::-1]
