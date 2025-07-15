@@ -376,7 +376,7 @@ async def websocket_endpoint(websocket: WebSocket, marriage_code: str, token: st
     try:
         while True:
             data = await websocket.receive_text()
-            timestamp = str(datetime.now())
+            timestamp = str(datetime.now().replace(microsecond=0))
             doc = {
                 "marriage_code": marriage_code,
                 "user_id": int(user),
@@ -396,3 +396,12 @@ async def get_history(marriage_code: str, _: str = Depends(get_current_user)):
     async for doc in cursor:
         messages.append(f"{doc['nick_name']}: {doc['comment']} {doc['timestamp']}")
     return messages[::-1]
+
+@app.delete("/delete_comment")
+async def delete_comment(user_id: str = Body(...),
+    marriage_code : str = Body(...),
+    timestamp: str = Body(...),
+    _: str = Depends(get_current_user)
+):
+    await db["comments"].delete_one({"user_id": user_id,"marriage_code" : marriage_code,"timestamp":timestamp})
+    return {"status": "deleted"}
