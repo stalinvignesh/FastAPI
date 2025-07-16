@@ -1,0 +1,688 @@
+[{
+  "_id": {
+    "$oid": "681e4fddb333b4c93b38d6af"
+  },
+  "user_id": 1,
+  "groom": "groom name",
+  "bride": "bride name",
+  "venue": "Area textwith all details",
+  "created_date": "Sat May 10 2025 00:26:29 GMT+0530 (India Standard Time)",
+  "accommodation_provided": false,
+  "engagement_date": "01-12-2021",
+  "marriage_date": "01-12-2021",
+  "welcome_message": "welcome",
+  "live_url": "",
+  "marriage_code": "MR-test"
+},
+{
+  "_id": {
+    "$oid": "681e7905642398e2c2f10b26"
+  },
+  "user_id": 1,
+  "groom": "grooming",
+  "bride": "shining",
+  "marriage_date": "10-05-2025 12:00 AM",
+  "engagement_date": "",
+  "venue": "Kovil",
+  "created_date": {
+    "$date": "2025-05-10T03:22:05.724Z"
+  },
+  "accommodation_provided": false,
+  "welcome_message": "welcome",
+  "live_url": "",
+  "marriage_code": "MR-test1"
+},
+{
+  "_id": {
+    "$oid": "681e90a1bf086d5579e0af71"
+  },
+  "marriage_id": 1,
+  "user_id": 1,
+  "groom": "Groom name",
+  "bride": "Bride name",
+  "marriage_date": "10-05-2025 04:00 AM",
+  "engagement_date": "",
+  "venue": "Kovil",
+  "created_date": {
+    "$date": "2025-05-10T05:02:49.052Z"
+  },
+  "accommodation_provided": false,
+  "welcome_message": "welcome",
+  "live_url": "",
+  "marriage_code": "dsf"
+},
+{
+  "_id": {
+    "$oid": "681e912e78d113bd94d4cfce"
+  },
+  "marriage_id": 2,
+  "user_id": 1,
+  "groom": "testing groom",
+  "bride": "testing bride",
+  "marriage_date": "10-05-2025 03:00 AM",
+  "engagement_date": "10-05-2025 07:00 AM",
+  "venue": "Kovil",
+  "created_date": {
+    "$date": "2025-05-10T05:05:10.156Z"
+  },
+  "accommodation_provided": false,
+  "welcome_message": "welcome",
+  "live_url": "",
+  "marriage_code": "sdfds"
+},
+{
+  "_id": {
+    "$oid": "681e957fe9a7d81f096b9c49"
+  },
+  "marriage_id": 3,
+  "user_id": 3,
+  "groom": "manamagan",
+  "bride": "managal",
+  "marriage_date": "10-05-2025 08:00 AM",
+  "engagement_date": "10-05-2025 06:00 AM",
+  "venue": "Pallikaranai Kovil",
+  "created_date": {
+    "$date": "2025-05-10T05:23:35.704Z"
+  },
+  "accommodation_provided": false,
+  "welcome_message": "welcome",
+  "live_url": "",
+  "marriage_code": "dsfsds"
+},
+{
+  "_id": {
+    "$oid": "6820955a3c7644d1317e29e8"
+  },
+  "marriage_id": 4,
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Trisha",
+  "marriage_date": "12-05-2025 05:00 AM",
+  "engagement_date": "",
+  "venue": "Kovil",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-11T17:47:30.576Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "",
+  "marriage_code": "243243"
+},
+{
+  "_id": {
+    "$oid": "68209693a64dcfd8a7bb2bee"
+  },
+  "marriage_id": 5,
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Trisha",
+  "marriage_date": "12-05-2025 06:00 AM",
+  "engagement_date": "",
+  "venue": "Kovil",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-11T17:52:43.122Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "",
+  "marriage_code": "7685"
+},
+{
+  "_id": {
+    "$oid": "6828d4b937679452e006fab6"
+  },
+  "marriage_id": 6,
+  "user_id": 1,
+  "groom": "Naani",
+  "bride": "Naanika",
+  "marriage_date": "18-05-2025 05:00 AM",
+  "engagement_date": "18-05-2025 04:00 AM",
+  "food_preference": "",
+  "food_options": [],
+  "events": {},
+  "venue": "Kovil",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-17T23:56:01.468Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "",
+  "marriage_code": "MR-6"
+},
+{
+  "_id": {
+    "$oid": "6828fa9686dc790f2ad65b79"
+  },
+  "events": [
+    {
+      "event_name": "ThiruVizha",
+      "event_description": "ThiruVizha",
+      "event_foods": "Non-Veg|Desserts",
+      "event_venue": "Kovil"
+    }
+  ],
+  "food_preference": "Both Veg & Non-Veg",
+  "food_options": "Desserts",
+  "marriage_id": 7,
+  "marriage_code": "MR-7",
+  "user_id": 1,
+  "groom": "Sudalai Madan",
+  "bride": "Esakki Amma",
+  "marriage_date": "18-05-2025 06:00 AM",
+  "venue": "Kovil",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-18T02:37:34.300Z"
+  },
+  "accommodation_provided": false,
+  "live_url": ""
+},
+{
+  "_id": {
+    "$oid": "68297c23e66c440345bed5aa"
+  },
+  "events": [
+    {
+      "event_name": "Evening Reception",
+      "event_description": "Reception in hotel with drinks",
+      "event_foods": "Non-Veg|Chinese|Desserts",
+      "event_venue": "Le Royal Meridian"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "Chinese",
+  "marriage_id": 8,
+  "marriage_code": "MR-8",
+  "user_id": 1,
+  "groom": "Vijay",
+  "bride": "Viji",
+  "marriage_date": "20-05-2025 07:00 AM",
+  "venue": "Panayur Mahal",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-18T11:50:19.025Z"
+  },
+  "accommodation_provided": false,
+  "live_url": ""
+},
+{
+  "_id": {
+    "$oid": "68297cdb1ce05a0b64c5f12e"
+  },
+  "events": [
+    {
+      "event_name": "Evening Drinks",
+      "event_description": "Parties",
+      "event_foods": "Non-Veg|Chinese|Italian|Desserts",
+      "event_venue": "ITC Hotel"
+    }
+  ],
+  "food_preference": "Both Veg & Non-Veg",
+  "food_options": "Chinese|Italian|Desserts",
+  "marriage_id": 9,
+  "marriage_code": "MR-9",
+  "user_id": 1,
+  "groom": "Raj",
+  "bride": "Raji",
+  "marriage_date": "21-05-2025 07:00 AM",
+  "venue": "ITC",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-18T11:53:23.553Z"
+  },
+  "status": "active",
+  "accommodation_provided": false,
+  "live_url": ""
+},
+{
+  "_id": {
+    "$oid": "6829e8929ccbafdd8b97dace"
+  },
+  "events": [
+    {
+      "event_name": "Event 1",
+      "event_description": "Mehandhi",
+      "event_date": "",
+      "event_foods": "Veg|Chinese|Desserts",
+      "event_venue": "Mandapam"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "Chinese|Desserts",
+  "marriage_id": 10,
+  "marriage_code": "MR-10",
+  "user_id": 1,
+  "groom": "Raja",
+  "bride": "Rani",
+  "marriage_date": "21-05-2025 05:00 AM",
+  "engagement_date": "21-05-2025 06:00 AM",
+  "venue": "Mandapam",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-18T19:32:58.961Z"
+  },
+  "accommodation_provided": false,
+  "live_url": ""
+},
+{
+  "_id": {
+    "$oid": "6829fffd5de10265e9421ad6"
+  },
+  "events": [
+    {
+      "event_name": "mehandhi",
+      "event_description": "fun",
+      "event_date": "",
+      "event_foods": "Non-Veg|Desserts",
+      "event_venue": "Porur Tasmac"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "Desserts",
+  "marriage_id": 11,
+  "marriage_code": "MR-11",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Tamanna",
+  "marriage_date": "20-05-2025 06:00 AM",
+  "engagement_date": "20-05-2025 06:00 AM",
+  "venue": "Kovil",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-18T21:12:53.962Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "https://www.facebook.com/share/v/1BmenkjpUH"
+},
+{
+  "_id": {
+    "$oid": "682a115aa7768286b64a35f0"
+  },
+  "events": [
+    {
+      "event_name": "Mehandhi",
+      "event_description": "fun",
+      "event_date": "20-05-2025 09:00 AM",
+      "event_foods": "Non-Veg",
+      "event_venue": "mandapam"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "Desserts",
+  "marriage_id": 12,
+  "marriage_code": "MR-12",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Keerthi",
+  "marriage_date": "20-05-2025 09:00 AM",
+  "engagement_date": "20-05-2025 05:00 AM",
+  "venue": "Kovil",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-18T22:26:58.889Z"
+  },
+  "accommodation_provided": false,
+  "live_url": {
+    "url": "https://youtu.be/VsoNDq9OM-I",
+    "public": true
+  }
+},
+{
+  "_id": {
+    "$oid": "682e24521e8f8028f9a2ad0b"
+  },
+  "events": [
+    {
+      "event_name": "Mehandhi",
+      "event_description": "Mehandhi function and to have fun with relations",
+      "event_date": "25-05-2025 08:00 PM",
+      "event_foods": "Non-Veg|Hot Drinks|Cool Drinks|Snacks/Desserts",
+      "event_venue": "Le Royal Meridian , Guindy"
+    },
+    {
+      "event_name": "Party",
+      "event_description": "Party with all friends and relations, drinks available",
+      "event_date": "25-05-2025 09:00 PM",
+      "event_foods": "Non-Veg|Cool Drinks|Snacks/Desserts",
+      "event_venue": "Hilton Park,Guindy"
+    }
+  ],
+  "food_preference": "Both Veg & Non-Veg",
+  "food_options": "BreakFast|Lunch|Dinner",
+  "marriage_id": 13,
+  "marriage_code": "MR-13",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Hansika",
+  "marriage_date": "25-05-2025 07:00 AM",
+  "engagement_date": "25-05-2025 05:00 AM",
+  "venue": "Venkatesh Marriage Hall , Near old udhayam theatre , Ashok Pillar , Chennai - 112",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-22T00:36:58.406Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "https://www.facebook.com/reel/672415862376365"
+},
+{
+  "_id": {
+    "$oid": "682e2620613437eda524e938"
+  },
+  "events": [
+    {
+      "event_name": "Fun events",
+      "event_description": "Fun events with friends and relations",
+      "event_date": "31-05-2025 04:00 PM",
+      "event_foods": "Non-Veg|Hot Drinks|Cool Drinks|Snacks/Desserts",
+      "event_venue": "Annamalai Hall , Madurai"
+    },
+    {
+      "event_name": "Party",
+      "event_description": "Drinks party with friends and family for boys only",
+      "event_date": "31-05-2025 07:00 PM",
+      "event_foods": "Non-Veg|Cool Drinks|Snacks/Desserts",
+      "event_venue": "Grant Madurai , GRT Hotels , Madurai"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch",
+  "marriage_id": 14,
+  "marriage_code": "MR-14",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Anushka",
+  "marriage_date": "31-05-2025 07:00 AM",
+  "engagement_date": "31-05-2025 05:00 AM",
+  "venue": "Raja Muthaiyah Mandram , Madurai",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-22T00:44:40.833Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "https://youtu.be/HbYTIEGv2fY"
+},
+{
+  "_id": {
+    "$oid": "68336fbf6d181c15c1a8ba34"
+  },
+  "events": [
+    {
+      "event_name": "Mehandi",
+      "event_description": "mehandhi",
+      "event_date": "30-05-2025 04:00 AM",
+      "event_foods": "Hot Drinks",
+      "event_venue": "Home"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch|Dinner",
+  "marriage_id": 15,
+  "marriage_code": "MR-15",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Vanitha",
+  "marriage_date": "30-05-2025 06:00 AM",
+  "engagement_date": "30-05-2025 05:00 AM",
+  "venue": "Selvam Saraswathi Mahal , Kamarajar Road , Madurai - 625009",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-26T01:00:07.174Z"
+  },
+  "accommodation_provided": false,
+  "live_url": ""
+},
+{
+  "_id": {
+    "$oid": "6835efda335db29dbb73274a"
+  },
+  "events": [
+    {
+      "event_name": "ParT",
+      "event_description": "All drinks and snacks",
+      "event_date": "30-05-2025 09:00 PM",
+      "event_foods": "Non-Veg|Snacks|Desserts",
+      "event_venue": "Le Royal Meridian , Guindy , Chennai"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch",
+  "marriage_id": 16,
+  "marriage_code": "MR-16",
+  "user_id": 8,
+  "groom": "Venkat",
+  "bride": "Vanilla",
+  "marriage_date": "30-05-2025 07:00 AM",
+  "engagement_date": "30-05-2025 05:00 AM",
+  "venue": "Rajinikanth Raghavendra Mahal , Chennai",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-27T22:31:14.024Z"
+  },
+  "accommodation_provided": false,
+  "live_url": ""
+},
+{
+  "_id": {
+    "$oid": "6838c4ee4efa4cc521f648c9"
+  },
+  "events": [
+    {
+      "event_name": "Groom Make Over",
+      "event_description": "Make over and groom's friend's meet",
+      "event_date": "23-07-2025 07:00 AM",
+      "event_foods": "Hot Drinks",
+      "event_venue": "Marriage Hall"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch",
+  "marriage_id": 17,
+  "marriage_code": "MR-17",
+  "user_id": 4,
+  "groom": "Rahim",
+  "bride": "Rasheeda",
+  "marriage_date": "23-07-2025 09:00 AM",
+  "engagement_date": "22-07-2025 07:00 PM",
+  "venue": "Triplicane Mosque Hall , Triplicane , Chennai",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-05-30T02:04:54.634Z"
+  },
+  "accommodation_provided": false,
+  "live_url": "https://youtu.be/5_sxzxfvW8w"
+},
+{
+  "_id": {
+    "$oid": "6840b82b6b0c72316e744cb6"
+  },
+  "events": [
+    {
+      "event_name": "Drinks",
+      "event_description": "parti",
+      "event_date": "05-06-2025 05:00 AM",
+      "event_foods": "Non-Veg",
+      "event_venue": ""
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch",
+  "accommodation_provided": true,
+  "marriage_id": 18,
+  "marriage_code": "MR-18",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Chinmayi",
+  "marriage_date": "10-06-2025 05:00 AM",
+  "engagement_date": "05-06-2025 08:00 PM",
+  "venue": "Mandapam",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-06-05T02:48:35.851Z"
+  },
+  "live_url": {
+    "url": "https://youtu.be/xRPjKQtRXR8",
+    "public": true
+  }
+},
+{
+  "_id": {
+    "$oid": "6840bcbbb071872f5f0aa4a7"
+  },
+  "events": [],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch",
+  "accommodation_provided": true,
+  "marriage_id": 19,
+  "marriage_code": "MR-19",
+  "user_id": 1,
+  "groom": "Venkat",
+  "bride": "Nasria",
+  "marriage_date": "12-06-2025 07:00 AM",
+  "engagement_date": "11-06-2025 08:00 PM",
+  "venue": "Keezhakarai , Ramnad",
+  "welcome_message": "welcome",
+  "created_date": {
+    "$date": "2025-06-05T03:08:03.727Z"
+  },
+  "live_url": "https://youtu.be/nVNfKfYzw0E"
+},
+{
+  "_id": {
+    "$oid": "6855c28703f37f521dbc027f"
+  },
+  "events": [
+    {
+      "event_name": "asdf",
+      "event_description": "asdf",
+      "event_date": "21-06-2025 12:00 AM",
+      "event_foods": "Non-Veg|Hot Drinks|Cool Drinks",
+      "event_venue": ""
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "Lunch|Dinner",
+  "accommodation_provided": true,
+  "marriage_id": 20,
+  "marriage_code": "MR-20",
+  "user_id": 1,
+  "groom": "APIgroom",
+  "bride": "APIbride",
+  "marriage_date": "21-06-2025 05:00 AM",
+  "engagement_date": "21-06-2025 12:00 AM",
+  "venue": "sadf",
+  "welcome_message": "asdf",
+  "created_date": "2025-06-21 01:50:23.187630",
+  "live_url": {
+    "url": "https://youtu.be/VsoNDq9OM-I",
+    "public": true
+  }
+},
+{
+  "_id": {
+    "$oid": "685c36f8461dde009a6a7c98"
+  },
+  "events": [],
+  "food_preference": "Both Veg & Non-Veg",
+  "food_options": "BreakFast|Lunch",
+  "accommodation_provided": true,
+  "marriage_id": 21,
+  "marriage_code": "MR-21",
+  "user_id": 1,
+  "groom": "Venky",
+  "bride": "Pallavi",
+  "marriage_date": "30-06-2025 06:00 AM",
+  "engagement_date": "29-06-2025 09:00 PM",
+  "venue": "https://www.google.com/maps/search/?api=1&query=9.91727, 78.11221",
+  "welcome_message": "Welcome",
+  "created_date": "2025-06-25 23:20:48.845847"
+},
+{
+  "_id": {
+    "$oid": "685c385a461dde009a6a7c99"
+  },
+  "events": [],
+  "food_preference": "Non-Veg Only",
+  "food_options": "BreakFast|Lunch",
+  "accommodation_provided": true,
+  "marriage_id": 22,
+  "marriage_code": "MR-22",
+  "user_id": 1,
+  "groom": "Venky",
+  "bride": "Vaani",
+  "marriage_date": "30-07-2025 10:00 AM",
+  "engagement_date": "29-07-2025 09:00 PM",
+  "venue": "Germanus Hotel , Madurai",
+  "welcome_message": "Welcome",
+  "created_date": "2025-06-25 23:26:42.857006"
+},
+{
+  "_id": {
+    "$oid": "68640e62f3459574d9696cbe"
+  },
+  "events": [
+    {
+      "event_name": "Office bachelor party",
+      "event_description": "Just hang on..",
+      "event_date": "02-07-2025 08:00 PM",
+      "event_foods": "Non-Veg|Cool Drinks|Snacks|Desserts",
+      "event_venue": "ITC Chennai"
+    }
+  ],
+  "food_preference": "Non-Veg Only",
+  "food_options": "Lunch|Dinner",
+  "accommodation_provided": true,
+  "marriage_id": 23,
+  "marriage_code": "MR-23",
+  "user_id": 1,
+  "groom": "Venky",
+  "bride": "Vaani Bojan",
+  "marriage_date": "03-07-2025 06:00 AM",
+  "engagement_date": "02-07-2025 07:00 AM",
+  "venue": "https://www.google.com/maps/search/?api=1&query=9.91672, 78.11261",
+  "welcome_message": "Vanthurunga pa",
+  "created_date": "2025-07-01 22:05:46.523880"
+},
+{
+  "_id": {
+    "$oid": "6864361bf3459574d9696cbf"
+  },
+  "events": [],
+  "food_options": "BreakFast",
+  "accommodation_provided": true,
+  "marriage_id": 24,
+  "marriage_code": "MR-24",
+  "user_id": 1,
+  "groom": "Venky",
+  "bride": "Venissa",
+  "marriage_date": "02-07-2025 12:00 AM",
+  "engagement_date": "01-07-2025 12:00 AM",
+  "venue": "https://www.google.com/maps/search/?api=1&query=9.92858, 78.12804",
+  "welcome_message": "come on",
+  "created_date": "2025-07-02 00:55:15.629836"
+},
+{
+  "_id": {
+    "$oid": "68643decf3459574d9696cc1"
+  },
+  "events": [
+    {
+      "event_name": "Testing Event",
+      "event_description": "Tesging",
+      "event_date": "02-07-2025 12:00 AM",
+      "event_foods": "Veg",
+      "event_venue": "Same"
+    }
+  ],
+  "food_options": "BreakFast|Lunch",
+  "accommodation_provided": true,
+  "marriage_id": 25,
+  "marriage_code": "MR-25",
+  "user_id": 4,
+  "groom": "Venky",
+  "bride": "Venaky",
+  "marriage_date": "02-07-2025 12:00 AM",
+  "engagement_date": "02-07-2025 12:00 AM",
+  "venue": "Mandapam",
+  "welcome_message": "Come",
+  "created_date": "2025-07-02 01:28:36.915882"
+}]

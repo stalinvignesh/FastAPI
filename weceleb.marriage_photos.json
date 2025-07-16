@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "686c55d61ebf92f6cdc14b68"
+  },
+  "user_id": 1,
+  "photo_ids": [
+    {
+      "$oid": "686c55d61ebf92f6cdc14b66"
+    }
+  ],
+  "uploaded_date": "2025-07-08 04:48:46.643309",
+  "marriage_code": "MR-14"
+},
+{
+  "_id": {
+    "$oid": "686d5af8c9f3f927028e4465"
+  },
+  "user_id": 1,
+  "photo_ids": [
+    {
+      "$oid": "686d5af8c9f3f927028e4463"
+    }
+  ],
+  "marriage_code": "MR-14",
+  "uploaded_date": "2025-07-08 23:22:56.101005"
+},
+{
+  "_id": {
+    "$oid": "6872dba7dd89354444623076"
+  },
+  "user_id": 1,
+  "photo_ids": [
+    {
+      "$oid": "6872dba7dd89354444623074"
+    }
+  ],
+  "marriage_code": "MR-14",
+  "uploaded_date": "2025-07-13 03:33:19.149626"
+},
+{
+  "_id": {
+    "$oid": "6872f1cfdd89354444623086"
+  },
+  "user_id": 1,
+  "photo_ids": [
+    {
+      "$oid": "6872f1cfdd89354444623084"
+    }
+  ],
+  "marriage_code": "MR-14",
+  "uploaded_date": "2025-07-13 05:07:51.940151"
+}]

@@ -1,0 +1,313 @@
+[{
+  "_id": {
+    "$oid": "681597860adebe23b88653a7"
+  },
+  "user_id": 1,
+  "name": "Stalin Vignesh Kumar S",
+  "category": "normal",
+  "email": "stalinvignesh@gmail.com",
+  "password": "abc123",
+  "mobile": "9941914383",
+  "age": "39",
+  "relatives": {
+    "2": "friend",
+    "3": "brother"
+  },
+  "created_date": "Sat May 03 2025 09:41:50 GMT+0530 (India Standard Time)",
+  "last_login": "2025-07-17 02:10:45.690118"
+},
+{
+  "_id": {
+    "$oid": "681597860adebe23b88653a8"
+  },
+  "user_id": 2,
+  "name": "Venkatesh",
+  "category": "normal",
+  "email": "venkatesh.nkv@gmail.com",
+  "password": "abc123",
+  "mobile": "7010837159",
+  "age": 41,
+  "relatives": {
+    "1": "friend",
+    "3": "friend"
+  },
+  "created_date": "Sat May 03 2025 09:41:50 GMT+0530 (India Standard Time)",
+  "last_login": "2025-06-02 01:37:53.189819"
+},
+{
+  "_id": {
+    "$oid": "681597860adebe23b88653a9"
+  },
+  "user_id": 3,
+  "name": "Hari Prasad S",
+  "category": "normal",
+  "email": "stalinvignesh@gmail.com",
+  "password": "abc123",
+  "mobile": "8438319113",
+  "age": 28,
+  "relatives": {
+    "1": "brother",
+    "2": "friend"
+  },
+  "created_date": "Sat May 03 2025 09:41:50 GMT+0530 (India Standard Time)",
+  "last_login": "Sat May 03 2025 09:41:50 GMT+0530 (India Standard Time)"
+},
+{
+  "_id": {
+    "$oid": "68179d66955f8006282230da"
+  },
+  "user_id": 4,
+  "mobile": "1111111111",
+  "name": "Testing user",
+  "age": "25",
+  "email": "testing@test.com",
+  "last_login": "2025-07-02 02:12:15.330958"
+},
+{
+  "_id": {
+    "$oid": "6817a2e6487addb080706c71"
+  },
+  "user_id": 5,
+  "mobile": "1234567891",
+  "name": "testing 2nd user",
+  "age": "25",
+  "created_date": {
+    "$date": "2025-05-04T22:54:54.109Z"
+  },
+  "last_login": {
+    "$date": "2025-05-04T22:54:54.109Z"
+  },
+  "email": "testingemail@email.com"
+},
+{
+  "_id": {
+    "$oid": "68348e12e05678e7716f902c"
+  },
+  "user_id": 6,
+  "mobile": "1236547890",
+  "name": "Test User",
+  "age": "30",
+  "created_date": {
+    "$date": "2025-05-26T21:21:46.782Z"
+  },
+  "last_login": {
+    "$date": "2025-05-26T21:21:46.782Z"
+  },
+  "email": "testuser@testing.com"
+},
+{
+  "_id": {
+    "$oid": "68349430a40f6066a3e10764"
+  },
+  "user_id": 7,
+  "mobile": "7896541230",
+  "name": "Second test",
+  "age": "33",
+  "created_date": {
+    "$date": "2025-05-26T21:47:52.460Z"
+  },
+  "last_login": {
+    "$date": "2025-05-26T21:47:52.460Z"
+  },
+  "email": "second@testing.com"
+},
+{
+  "_id": {
+    "$oid": "683495647f39c43348278533"
+  },
+  "user_id": 8,
+  "mobile": "3333333333",
+  "name": "Third user",
+  "age": "33",
+  "created_date": {
+    "$date": "2025-05-26T21:53:00.635Z"
+  },
+  "last_login": {
+    "$date": "2025-05-26T21:53:00.635Z"
+  },
+  "email": "third@testing.com"
+},
+{
+  "_id": {
+    "$oid": "68349859c56df618e740f863"
+  },
+  "user_id": 9,
+  "mobile": "4444444444",
+  "name": "Fourth user",
+  "age": "44",
+  "created_date": {
+    "$date": "2025-05-26T22:05:37.518Z"
+  },
+  "last_login": {
+    "$date": "2025-05-26T22:05:37.518Z"
+  },
+  "email": "fourth@testing.com"
+},
+{
+  "_id": {
+    "$oid": "6834997df8bbd547c8ec4a7b"
+  },
+  "user_id": 10,
+  "mobile": "5555555555",
+  "name": "Fifth User",
+  "age": "55",
+  "created_date": "2025-05-26 22:10:28.898010",
+  "last_login": "2025-05-26 22:10:28.898010",
+  "email": "fifth@testing.com"
+},
+{
+  "_id": {
+    "$oid": "68349b6d2854028bef2948af"
+  },
+  "user_id": 11,
+  "mobile": "7777777777",
+  "name": "Seventh User",
+  "age": "77",
+  "created_date": "2025-05-26 22:18:45.035711",
+  "last_login": "2025-05-26 22:18:45.035711",
+  "email": "seventh@testing.com"
+},
+{
+  "_id": {
+    "$oid": "68349c2e2854028bef2948b0"
+  },
+  "user_id": 12,
+  "mobile": "9999999999",
+  "name": "Nineth User",
+  "age": "99",
+  "created_date": "2025-05-26 22:21:58.229767",
+  "last_login": "2025-05-26 22:21:58.229767",
+  "email": "nineth@testing.com"
+},
+{
+  "_id": {
+    "$oid": "6855dc355f7309a46470dcfa"
+  },
+  "user_id": 13,
+  "mobile": "1122334455",
+  "name": "Doubled Number",
+  "age": "33",
+  "created_date": "2025-06-21 03:39:57.596406",
+  "last_login": "2025-06-21 03:39:57.596406",
+  "email": "doublednum@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855dd7c5f7309a46470dcfc"
+  },
+  "user_id": 14,
+  "mobile": "1112223334",
+  "name": "Tripled User",
+  "age": "34",
+  "created_date": "2025-06-21 03:45:24.374478",
+  "last_login": "2025-06-21 03:45:24.374478",
+  "email": "tripled@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855ddfd5f7309a46470dcfe"
+  },
+  "user_id": 15,
+  "mobile": "1111122222",
+  "name": "Fiveth User",
+  "age": "55",
+  "created_date": "2025-06-21 03:47:33.495340",
+  "last_login": "2025-06-21 03:47:33.495340",
+  "email": "fiveth@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855e2755f7309a46470dd00"
+  },
+  "user_id": 16,
+  "mobile": "1111112222",
+  "name": "SixandFour user",
+  "age": "64",
+  "created_date": "2025-06-21 04:06:37.269914",
+  "last_login": "2025-06-21 04:06:37.269914",
+  "email": "sixfour@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855e63b5f7309a46470dd02"
+  },
+  "user_id": 17,
+  "mobile": "1346794613",
+  "name": "One After Other",
+  "age": "11",
+  "created_date": "2025-06-21 04:22:43.397590",
+  "last_login": "2025-06-21 04:22:43.397590",
+  "email": "oneafter@other.com"
+},
+{
+  "_id": {
+    "$oid": "6855e8da5f7309a46470dd04"
+  },
+  "user_id": 18,
+  "mobile": "1937739146",
+  "name": "Cross Plus",
+  "age": "19",
+  "created_date": "2025-06-21 04:33:54.110198",
+  "last_login": "2025-06-21 04:33:54.110198",
+  "email": "crossplus@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855ea785f7309a46470dd06"
+  },
+  "user_id": 19,
+  "mobile": "1673498246",
+  "name": "Triangle User",
+  "age": "76",
+  "created_date": "2025-06-21 04:40:48.433601",
+  "last_login": "2025-06-21 04:40:48.433601",
+  "email": "tria@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855ec0b5f7309a46470dd08"
+  },
+  "user_id": 20,
+  "mobile": "7895123579",
+  "name": "Zig Zag",
+  "age": "78",
+  "created_date": "2025-06-21 04:47:31.560840",
+  "last_login": "2025-06-21 04:47:31.560840",
+  "email": "zigzag@user.com"
+},
+{
+  "_id": {
+    "$oid": "6855ed1b5f7309a46470dd0a"
+  },
+  "user_id": 21,
+  "mobile": "1478523697",
+  "name": "SFrom One",
+  "age": "19",
+  "created_date": "2025-06-21 04:52:03.541864",
+  "last_login": "2025-06-21 04:52:03.923812",
+  "email": "sfromone@one.com"
+},
+{
+  "_id": {
+    "$oid": "6855eda75f7309a46470dd0c"
+  },
+  "user_id": 22,
+  "mobile": "7896541237",
+  "name": "Severn SReverse",
+  "age": "79",
+  "created_date": "2025-06-21 04:54:23.702388",
+  "last_login": "2025-06-21 04:54:23.886678",
+  "email": "severnsrev@re.com"
+},
+{
+  "_id": {
+    "$oid": "6855ee0f5f7309a46470dd0e"
+  },
+  "user_id": 23,
+  "mobile": "7896321473",
+  "name": "Sevtosev Box Update",
+  "age": "73",
+  "created_date": "2025-06-21 04:56:07.102559",
+  "last_login": "2025-06-21 19:17:56.833723",
+  "email": "sev@sev.com"
+}]

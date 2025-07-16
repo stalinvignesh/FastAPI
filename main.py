@@ -398,10 +398,13 @@ async def get_history(marriage_code: str, _: str = Depends(get_current_user)):
     return messages[::-1]
 
 @app.delete("/delete_comment")
-async def delete_comment(user_id: str = Body(...),
+async def delete_comment(user_id: int = Body(...),
+    comment : str = Body(...),
     marriage_code : str = Body(...),
     timestamp: str = Body(...),
     _: str = Depends(get_current_user)
 ):
-    await db["comments"].delete_one({"user_id": user_id,"marriage_code" : marriage_code,"timestamp":timestamp})
+    print(user_id,marriage_code,comment,timestamp)
+    await db["video_comments"].delete_one({"user_id": int(user_id),"marriage_code" : marriage_code,"comment":comment,
+                                     "timestamp":timestamp})
     return {"status": "deleted"}
