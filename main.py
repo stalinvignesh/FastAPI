@@ -38,7 +38,7 @@ fs = AsyncIOMotorGridFSBucket(db)
 
 SECRET_KEY = "SECRET_KEY"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = 5
 REFRESH_TOKEN_EXPIRE_DAYS = 7
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -75,7 +75,7 @@ class FindPayload(BaseModel):
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
-    expire = datetime.now() + (expires_delta or timedelta(minutes=15))
+    expire = datetime.now() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
@@ -114,7 +114,7 @@ async def get_current_user(authorization: str = Header(...)):
             raise HTTPException(status_code=401, detail="Invalid token")
         return phone_number
     except JWTError:
-        raise HTTPException(status_code=403, detail="Could not validate credentials")
+        raise HTTPException(status_code=403, detail="Could not validate credentials or expired.")
 
 async def get_current_user_websocket(token: str):
     """Modified version for WebSocket token validation"""
@@ -150,7 +150,14 @@ async def refresh_token(data : RefreshToken):
 async def logout(data : RefreshToken):
     refresh_token = data.refresh_token
     await db["refresh_tokens"].delete_one({"token": refresh_token})
+    if not refresh_token:
+        await
     return {"message": "Logged out"}
+
+@app.delete("/delete_refresh/{phone_number}")
+async def delete_refresh(phone_number: str):
+    await db["refresh_tokens"].delete_many({"mobile":phone_number})
+    return {"message" : "Deleted All Refresh"}
 
 @app.get("/secure_data")
 async def secure_data(user: str = Depends(get_current_user)):
