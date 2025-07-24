@@ -150,8 +150,6 @@ async def refresh_token(data : RefreshToken):
 async def logout(data : RefreshToken):
     refresh_token = data.refresh_token
     await db["refresh_tokens"].delete_one({"token": refresh_token})
-    if not refresh_token:
-        await
     return {"message": "Logged out"}
 
 @app.delete("/delete_refresh/{phone_number}")
