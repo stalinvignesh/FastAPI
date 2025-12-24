@@ -39,14 +39,17 @@ fs = AsyncIOMotorGridFSBucket(db)
 
 SECRET_KEY = "SECRET_KEY"
 RESET_KEY = "RESET_KEY"
+REGISTER_KEY = "REGISTER_KEY"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 15
 REFRESH_TOKEN_EXPIRE_DAYS = 7
 RESET_TOKEN_EXPIRE_MINUTES = 5
+REGISTER_TOKEN_EXPIRE_MINUTES = 10
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 oauth2_scheme_reset = OAuth2PasswordBearer(tokenUrl="/reset")
+oauth2_scheme_register = OAuth2PasswordBearer(tokenUrl="/register")
 
 class Token(BaseModel):
     access_token: str
@@ -59,6 +62,11 @@ class ResetToken(BaseModel):
     token_type: str = "bearer"
     message : str
 
+class RegisterToken(BaseModel):
+    register_token: str
+    token_type: str = "bearer"
+    message : str
+
 
 class RefreshToken(BaseModel):
     refresh_token: str
@@ -67,8 +75,20 @@ class ResetPin(BaseModel):
     email : str
     message : str
 
+class RegisterNew(BaseModel):
+    mobile : str
+    email : str
+    message : str
+
 # Temporary store for OTPs (in-memory for demo; use DB or Redis in prod)
 otp_store = {}
+
+class RegisterRequest(BaseModel):
+    mobile : str
+    name : str
+    email : str
+    age : str
+    pin : str
 
 class OTPRequest(BaseModel):
     phone_number: str
@@ -96,6 +116,12 @@ def create_reset_token(data: dict, expires_delta: timedelta | None = None):
     expire = datetime.now() + (expires_delta or timedelta(minutes=RESET_TOKEN_EXPIRE_MINUTES))
     to_encode.update({"exp": expire})
     return jwt.encode(to_encode, RESET_KEY, algorithm=ALGORITHM)
+
+def create_register_token(data: dict, expires_delta: timedelta | None = None):
+    to_encode = data.copy()
+    expire = datetime.now() + (expires_delta or timedelta(minutes=REGISTER_TOKEN_EXPIRE_MINUTES))
+    to_encode.update({"exp": expire})
+    return jwt.encode(to_encode, REGISTER_KEY, algorithm=ALGORITHM)
 
 @app.post("/send_otp")
 async def send_otp(request: OTPRequest):
@@ -133,7 +159,15 @@ async def reset(request: OTPVerifyRequest ):
     })
     return {"reset_token": reset_token,"message" : "success"}
 
-
+@app.post("/register",response_model=RegisterToken)
+async def reset(request: OTPVerifyRequest ):
+    register_token = create_register_token(data={"sub": request.phone_number}, expires_delta=timedelta(minutes=RESET_TOKEN_EXPIRE_MINUTES))
+    await db["refresh_tokens"].insert_one({
+        "token": register_token,
+        "mobile": request.phone_number,
+        "expires": datetime.now() + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+    })
+    return {"register_token": register_token,"message" : "success"}
 
 # Dependency to get current user from token
 async def get_current_user(authorization: str = Header(...)):
@@ -151,6 +185,17 @@ async def get_current_reset_user(authorization: str = Header(...)):
     token = authorization.split(" ")[1] # Bearer <token>
     try:
         payload = jwt.decode(token, RESET_KEY, algorithms=[ALGORITHM])
+        phone_number = payload.get("sub")
+        if phone_number is None:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        return phone_number
+    except JWTError:
+        raise HTTPException(status_code=403, detail="Could not validate credentials or expired.")
+
+async def get_current_register_user(authorization: str = Header(...)):
+    token = authorization.split(" ")[1] # Bearer <token>
+    try:
+        payload = jwt.decode(token, REGISTER_KEY, algorithms=[ALGORITHM])
         phone_number = payload.get("sub")
         if phone_number is None:
             raise HTTPException(status_code=401, detail="Invalid token")
@@ -184,6 +229,37 @@ async def reset_pin(request: OTPVerifyRequest , _: str = Depends(get_current_res
     if updated.modified_count != 1 :
         return { "email" : "Error" ,"message": "Error updating DB" }
     return {"email" : email["email"] ,"message": "Reset Success" }
+
+@app.post("/register_new",response_model=RegisterNew)
+async def register_new(request: RegisterRequest , _: str = Depends(get_current_register_user)):
+    pin = request.pin
+    name = request.name
+    mobile = request.mobile
+    email = request.email
+    age = request.age
+    pin_hash = pwd_context.hash(pin)
+    today_date = str(datetime.now())
+    response = []
+    pipeline = [
+        {"$group": {"_id": None, "max_uid": {"$max": "$user_id"}}}
+    ]
+    cursor = db["user_data"].aggregate(pipeline)
+    async for doc in cursor:
+        if doc:
+            if "_id" in doc:
+                doc["id"] = str(doc["_id"])
+                doc.pop("_id", None)
+            response.append(doc)
+    max_uid = response[0]["max_uid"] if response else 0
+    max_uid += 1
+    inserted = await db["user_data"].insert_one({"user_id" : max_uid,"mobile":mobile ,"name": name,"age" : age,
+                                                 "email" : email ,"pin" : pin_hash ,"created_date": today_date,
+                                                "last_login" : today_date,"is_pin_permanent": True})
+    get_value = await db["user_data"].find_one({"mobile":mobile},{ "_id" : 0 ,
+                                                                           "mobile" : 1 ,"email" :1 })
+    if not inserted.acknowledged:
+        return { "mobile" : "Error" , "email" : "Error" , "message": f"Error inserting DB {inserted}" }
+    return {"mobile" : get_value["mobile"] , "email" : get_value["email"] , "message": "Register Success" }
 
 @app.post("/refresh", response_model=Token)
 async def refresh_token(data : RefreshToken):
@@ -231,7 +307,7 @@ async def get_by_field(collection: str, field: str, value: str, _: str = Depends
 
 @app.post("/find/{collection}")
 async def get_by_find(collection: str, payload: FindPayload,_: str = Depends(get_current_user)):
-    cursor = db[collection].find(payload.query , payload.require)
+    cursor =  db[collection].find(payload.query , payload.require)
     results = []
     #if not cursor.alive:
         #raise HTTPException(status_code=404, detail="Not found")
@@ -448,8 +524,7 @@ async def delete_comment(user_id: int = Body(...),
     comment : str = Body(...),
     marriage_code : str = Body(...),
     timestamp: str = Body(...),
-    _: str = Depends(get_current_user)
-):
+    _: str = Depends(get_current_user)):
     print(user_id,marriage_code,comment,timestamp)
     await db["video_comments"].delete_one({"user_id": int(user_id),"marriage_code" : marriage_code,"comment":comment,
                                      "timestamp":timestamp})
